@@ -31,7 +31,30 @@ ticket_booking_system/
 └── util/                                # Optional helper utilities (if any)
 ````
 
----
+### 🗃️ MySQL Integration & Tasks
+
+This project also includes **SQL task files** that demonstrate database setup and query operations using **MySQL**.
+
+#### 📦 Breakdown of SQL Tasks:
+
+| Task       | Description                               | File(s)                                    |
+| ---------- | ----------------------------------------- | ------------------------------------------ |
+| **Task 1** | Table creation & data insertion           | `created_table.sql`, `inserted_values.sql` |
+| **Task 2** | Query operations (e.g., SELECT, JOIN)     | `Task2.sql`                                |
+| **Task 3** | Advanced queries (e.g., GROUP BY, HAVING) | `Task3.sql`                                |
+| **Task 4** | Aggregation, filtering, subqueries        | `Task4.sql`                                |
+
+#### ✅ Usage:
+
+To execute any SQL task, open your MySQL CLI or GUI (e.g., MySQL Workbench) and run:
+
+```sql
+SOURCE path/to/created_table.sql;
+SOURCE path/to/inserted_values.sql;
+-- Then run other tasks like:
+SOURCE path/to/Task2.sql;
+```
+
 
 ## 🔄 Major Functional Flow
 
