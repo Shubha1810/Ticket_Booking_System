@@ -1,60 +1,158 @@
 
-```markdown
+````markdown
 # 🎟️ Ticket Booking System
 
-A console-based Python application to manage events and ticket bookings. Users can create events, book or cancel tickets, and view booking reports by date, month, or year.
+A **Python-based Command-Line Interface (CLI)** application for managing events and ticket bookings. Built for simplified event handling and ticketing operations, this system allows organizers and users to:
+
+- Create and manage events
+- Book and cancel tickets
+- View and filter bookings by date, month, and year
+- Get clean tabular outputs using `tabulate`
 
 ---
 
-## 📁 Project Structure
+## 🗂️ Project Structure
 
-```
-
-ticket\_booking\_system/
+```plaintext
+ticket_booking_system/
 │
-├── main.py                              # Main script with user interaction menu
-├── services/
-│   └── ticket\_booking\_system.py         # Business logic for booking system
-├── entity/
-│   └── customer.py                      # Customer class with name, email, phone
-├── exception/
-│   ├── event\_not\_found\_exception.py     # Custom exception for missing events
-│   └── invalid\_booking\_id\_exception.py  # Custom exception for invalid bookings
-└── util/
-└── (optional helper utils if used)
-
+├── main.py                              # Main CLI-based entry point
+│
+├── services/                            # Core business logic
+│   └── ticket_booking_system.py
+│
+├── entity/                              # Data model classes
+│   └── customer.py
+│
+├── exception/                           # Custom exception handling
+│   ├── event_not_found_exception.py
+│   └── invalid_booking_id_exception.py
+│
+└── util/                                # Optional helper utilities (if any)
 ````
 
 ---
 
-## 🚀 Features
+## 🔄 Major Functional Flow
 
-- 🎫 Create Events (Movies, Concerts, Sports)
-- 👁️ View Event Listings
-- 👥 Book Tickets for Multiple Customers
-- ❌ Cancel Existing Bookings
-- 📆 View Bookings (All, Date Range, Month, Year-wise)
-- 🔒 Validations for Name, Email, Phone, Dates
-- 📊 Clean output using `tabulate`
+### 1️⃣ Event Creation
+
+* Inputs Required:
+
+  * Event Name (minimum 3 characters)
+  * Date (optional, defaults to today)
+  * Time (HH\:MM format)
+  * Total Seats (positive integer)
+  * Ticket Price (positive number)
+  * Event Type (Movie/Concert/Sports)
+  * Venue City & Address
+
+✅ Returns a system-generated Event ID upon successful creation.
 
 ---
 
-## 🛠️ Setup Instructions
+### 2️⃣ Ticket Booking
 
-1. **Clone the repository**
+* Lists all available events
+* User selects event by index
+* Inputs:
+
+  * Number of tickets
+  * For each ticket:
+
+    * Name (minimum 3 chars)
+    * Email (must end with `@gmail.com`)
+    * Phone (10 digits)
+
+✅ Successful booking shows:
+
+* Booking ID
+* Event Details
+* Total Cost
+* Booking Date
+* Customer Info in tabular format
+
+---
+
+### 3️⃣ Cancel Booking
+
+* Input: Booking ID
+* Booking is removed if ID is valid
+* Handles invalid IDs using custom exceptions
+
+---
+
+### 4️⃣ View Bookings
+
+Filter options:
+
+* View All Bookings
+* View by Date Range
+* View by Month (MM)
+* View by Year (YYYY)
+
+🔎 Displays tabular booking info with:
+
+* Booking ID
+* Event Name
+* Number of Tickets
+* Total Cost
+* Booking Date
+
+---
+
+## 🧪 Sample Output
 
 ```bash
-git clone https://github.com/YourUsername/Ticket_Booking_System.git
-cd Ticket_Booking_System
-````
++-------------+-----------------+----------+--------+------------+
+| Booking ID  | Event           | Tickets  | Cost   | Date       |
++-------------+-----------------+----------+--------+------------+
+| 101         | Coldplay Live   | 3        | ₹4500  | 2025-07-01 |
++-------------+-----------------+----------+--------+------------+
+```
 
-2. **Install Dependencies**
+---
+
+## 🧾 Input Validations
+
+| Field       | Rule                                    |
+| ----------- | --------------------------------------- |
+| Name        | Minimum 3 characters, only alphabets    |
+| Email       | Must end with `@gmail.com`              |
+| Phone       | Exactly 10 digits                       |
+| Date        | Must follow `YYYY-MM-DD` format         |
+| Event Type  | Must be `movie`, `concert`, or `sports` |
+| Seats/Price | Must be positive integers/floats        |
+
+---
+
+## ⚙️ Tech Stack
+
+| Component             | Description                                |
+| --------------------- | ------------------------------------------ |
+| **Python 3.x**        | Core language                              |
+| **tabulate**          | For displaying clean CLI tables            |
+| **datetime**          | Handling event and booking dates           |
+| **Custom Exceptions** | For handling invalid operations gracefully |
+
+---
+
+## ▶️ How to Run
+
+### 🔌 Prerequisites
+
+* Python 3.x installed
+* Terminal or command prompt
+
+### 🛠️ Installation
+
+Install the required Python library:
 
 ```bash
 pip install tabulate
 ```
 
-3. **Run the Application**
+### 🚀 Run the App
 
 ```bash
 python main.py
@@ -62,124 +160,44 @@ python main.py
 
 ---
 
-## 🔄 Application Flow
+## 🧭 Sample Workflow
 
-### 1. Main Menu Options
-
-* Create Event
-* View Event Details
-* Book Tickets
-* Cancel Booking
-* View Bookings by Date/Month/Year
-* Exit
+1. 🎭 Create an Event (e.g., Coldplay Concert in Mumbai)
+2. 👥 Book 2-3 tickets using user details
+3. 🔍 View all bookings or filter by month/year
+4. ❌ Cancel a booking using Booking ID
+5. 📊 Generate a report-like view from bookings
 
 ---
 
-### 2. Create Event
+## ❗ Error Handling & Exceptions
 
-Inputs required:
-
-* Event Name (minimum 3 letters)
-* Date (optional — defaults to today)
-* Time (HH\:MM format)
-* Total Seats (positive integer)
-* Ticket Price (positive number)
-* Event Type (Movie/Concert/Sports)
-* Venue City & Address
-
-🆗 Successful creation returns a unique Event ID.
+| Scenario                    | Handling Mechanism                 |
+| --------------------------- | ---------------------------------- |
+| Invalid Event Selection     | Graceful message with retry option |
+| Booking with Wrong Inputs   | Input validations & error messages |
+| Cancel Non-existent Booking | `InvalidBookingIDException` raised |
+| Event Not Found             | `EventNotFoundException` raised    |
 
 ---
 
-### 3. View Event Details
+## 📈 Use Case Scenarios
 
-Shows a formatted table listing:
-
-* Event Name
-* Time
-* Venue
-* Ticket Price
-
----
-
-### 4. Book Tickets
-
-* Choose event from the list
-* Enter number of tickets
-* For each ticket:
-
-  * Name (validated)
-  * Email (must be `@gmail.com`)
-  * Phone (10 digits)
-
-🎉 Booking Confirmation:
-
-* Booking ID
-* Event Name
-* Total Cost
-* Booking Time
-* Customer list in table format
+| 🎯 Role         | 🔍 Purpose                         |
+| --------------- | ---------------------------------- |
+| Event Organizer | Add and manage events              |
+| Customer/User   | Book tickets and view events       |
+| Admin Operator  | View reports on bookings over time |
 
 ---
 
-### 5. Cancel Booking
+## 💡 Future Enhancements
 
-* Input booking ID
-* System cancels the booking and updates availability
-* Handles invalid booking IDs using custom exceptions
-
----
-
-### 6. View Bookings
-
-Filter options:
-
-* All Bookings
-* Date Range (YYYY-MM-DD)
-* Month (MM)
-* Year (YYYY)
-
-Shows a table of:
-
-* Booking ID
-* Event Name
-* Tickets
-* Total Cost
-* Booking Date
+* 🌐 Web-based version using Flask/Django
+* 📤 Export bookings to Excel/CSV
+* 🔐 Admin login & role-based access
+* 🧾 QR code generation for booked tickets
+* 📱 SMS/email notifications
 
 ---
 
-## 🧪 Input Validations
-
-| Field       | Rule                                |
-| ----------- | ----------------------------------- |
-| Name        | At least 3 characters, only letters |
-| Email       | Must end with `@gmail.com`          |
-| Phone       | Exactly 10 digits                   |
-| Date        | Format `YYYY-MM-DD`                 |
-| Event Type  | Must be Movie, Concert, or Sports   |
-| Seats/Price | Positive numbers only               |
-
----
-
-## 📦 Libraries Used
-
-* `tabulate` – for clean and formatted table outputs
-* `datetime` – for date/time parsing and filtering
-* Custom Exceptions – for handling edge cases smoothly
-
----
-
-## 👀 Sample Output
-
-```
---- Ticket Booking Menu ---
-1. Create Event
-2. View Event Details
-3. Book Tickets
-4. Cancel Booking
-5. View Bookings by Date/Month/Year
-6. Exit
-```
-
----
