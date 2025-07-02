@@ -29,13 +29,13 @@ ticket\_booking\_system/
 
 ## 🚀 Features
 
-- Create Events (Movies, Concerts, Sports)
-- View Event Listings
-- Book Tickets for Multiple Customers
-- Cancel Existing Bookings
-- View Bookings (All, Date Range, Month, Year-wise)
-- Validations for Name, Email, Phone, Dates
-- Formatted table output using `tabulate`
+- 🎫 Create Events (Movies, Concerts, Sports)
+- 👁️ View Event Listings
+- 👥 Book Tickets for Multiple Customers
+- ❌ Cancel Existing Bookings
+- 📆 View Bookings (All, Date Range, Month, Year-wise)
+- 🔒 Validations for Name, Email, Phone, Dates
+- 📊 Clean output using `tabulate`
 
 ---
 
@@ -50,8 +50,6 @@ cd Ticket_Booking_System
 
 2. **Install Dependencies**
 
-This project uses the `tabulate` library:
-
 ```bash
 pip install tabulate
 ```
@@ -62,110 +60,117 @@ pip install tabulate
 python main.py
 ```
 
+---
+
 ## 🔄 Application Flow
 
-### 1. **Main Menu**
-
-User is presented with 6 options:
+### 1. Main Menu Options
 
 * Create Event
 * View Event Details
 * Book Tickets
 * Cancel Booking
-* View Bookings
+* View Bookings by Date/Month/Year
 * Exit
 
+---
 
-### 2. **Create Event**
+### 2. Create Event
 
-User provides:
+Inputs required:
 
-* Event Name (validated)
-* Date (optional: uses today if empty)
-* Time
-* Total Seats
-* Ticket Price
-* Event Type (`Movie`, `Concert`, `Sports`)
-* Venue and Address
+* Event Name (minimum 3 letters)
+* Date (optional — defaults to today)
+* Time (HH\:MM format)
+* Total Seats (positive integer)
+* Ticket Price (positive number)
+* Event Type (Movie/Concert/Sports)
+* Venue City & Address
 
-✅ Event gets added to the system with a unique event ID.
+🆗 Successful creation returns a unique Event ID.
 
+---
 
-### 3. **View Event Details**
+### 3. View Event Details
 
-Displays a **tabulated list** of all available events with:
+Shows a formatted table listing:
 
-* Name
+* Event Name
 * Time
 * Venue
-* Price
+* Ticket Price
 
-### 4. **Book Tickets**
+---
 
-Flow:
+### 4. Book Tickets
 
-1. Lists all events with indexes.
-2. User selects an event by number.
-3. User enters number of tickets.
-4. For each ticket, user enters:
+* Choose event from the list
+* Enter number of tickets
+* For each ticket:
 
-   * Name (validated)
-   * Email (must end with `@gmail.com`)
-   * Phone (10-digit number)
+  * Name (validated)
+  * Email (must be `@gmail.com`)
+  * Phone (10 digits)
 
-✅ Booking confirmation is shown with:
+🎉 Booking Confirmation:
 
 * Booking ID
 * Event Name
 * Total Cost
-* Booking Date
-* Customer Details in tabular form
+* Booking Time
+* Customer list in table format
 
+---
 
-### 5. **Cancel Booking**
+### 5. Cancel Booking
 
-User enters a booking ID.
-If valid, the booking is removed and seats are freed.
-Handles invalid ID with custom exceptions.
+* Input booking ID
+* System cancels the booking and updates availability
+* Handles invalid booking IDs using custom exceptions
 
+---
 
-### 6. **View Bookings**
+### 6. View Bookings
 
-User can filter bookings by:
+Filter options:
 
 * All Bookings
-* Date Range
-* Month (MM format)
-* Year (YYYY format)
+* Date Range (YYYY-MM-DD)
+* Month (MM)
+* Year (YYYY)
 
-Displays bookings in a table with:
+Shows a table of:
 
 * Booking ID
 * Event Name
-* No. of Tickets
+* Tickets
 * Total Cost
 * Booking Date
 
+---
 
-## 🧪 Validations
+## 🧪 Input Validations
 
-| Field         | Validation                                  |
-| ------------- | ------------------------------------------- |
-| Name          | At least 3 characters, alphabet only        |
-| Email         | Must end with `@gmail.com`                  |
-| Phone         | 10 digits only                              |
-| Date          | `YYYY-MM-DD` format                         |
-| Event Type    | Must be either `movie`, `concert`, `sports` |
-| Tickets/Seats | Positive integers only                      |
+| Field       | Rule                                |
+| ----------- | ----------------------------------- |
+| Name        | At least 3 characters, only letters |
+| Email       | Must end with `@gmail.com`          |
+| Phone       | Exactly 10 digits                   |
+| Date        | Format `YYYY-MM-DD`                 |
+| Event Type  | Must be Movie, Concert, or Sports   |
+| Seats/Price | Positive numbers only               |
 
+---
 
 ## 📦 Libraries Used
 
-* `tabulate` - for clean table-based CLI output
-* `datetime` - to handle dates and timestamps
-* Custom Exceptions for error handling
+* `tabulate` – for clean and formatted table outputs
+* `datetime` – for date/time parsing and filtering
+* Custom Exceptions – for handling edge cases smoothly
 
-## 📸 Sample Output
+---
+
+## 👀 Sample Output
 
 ```
 --- Ticket Booking Menu ---
@@ -177,4 +182,4 @@ Displays bookings in a table with:
 6. Exit
 ```
 
-
+---
